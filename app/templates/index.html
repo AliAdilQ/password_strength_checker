@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Check your password strength{% endblock %}
+{% block page %}home{% endblock %}
+{% block content %}
+<div class="hero-glow">
+  <section class="page-width hero">
+    <div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> YOUR FIRST LINE OF DEFENSE</span><h1>Small check.<br><span>Stronger security.</span></h1><p>Good security starts with a strong password. Get an instant<br class="desktop-break"> strength check and a little guidance to make yours better.</p><a href="#checker" class="text-link hero-cta">Check your password <i class="bi bi-arrow-down-right" aria-hidden="true"></i></a></div>
+    <div class="hero-visual" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="shield-art"><i aria-hidden="true" class="bi bi-shield-check"></i></div><span class="floating-label label-top"><i aria-hidden="true" class="bi bi-lock-fill"></i> Private by design</span><span class="floating-label label-bottom"><span class="status-dot"></span> A stronger digital you</span><span class="visual-spark spark-one">+</span><span class="visual-spark spark-two">+</span></div>
+  </section>
+</div>
+<div class="page-width home-content">
+  <section class="checker-section" id="checker" aria-labelledby="checker-title">
+    <div class="section-heading"><div><span class="eyebrow">01 / THE STRENGTH CHECK</span><h2 id="checker-title">How strong is your password?</h2></div><span class="privacy-pill"><i class="bi bi-shield-check" aria-hidden="true"></i> Privacy First — Your passwords are never stored.</span></div>
+    <div class="checker-shell">
+      <div class="checker-input-panel">
+        <div class="panel-topline"><span class="small-label"><i class="bi bi-fingerprint" aria-hidden="true"></i> PASSWORD ANALYZER</span><span class="live-badge"><span class="status-dot"></span> Live analysis</span></div>
+        <label class="input-label" for="password-input">Enter a password to check</label>
+        <div class="password-field"><i class="bi bi-key field-leading" aria-hidden="true"></i><input id="password-input" type="password" maxlength="256" placeholder="Type your password here" autocomplete="off" spellcheck="false" autocapitalize="off" aria-describedby="checker-privacy" disabled><button id="password-toggle" class="visibility-button" aria-label="Show password" aria-pressed="false"><i class="bi bi-eye" aria-hidden="true"></i></button></div>
+        <p class="input-note" id="checker-privacy"><i class="bi bi-lock" aria-hidden="true"></i> Analyzed in your browser. Never sent or saved.</p>
+        <noscript><div class="flash flash-info">Enable JavaScript for private, real-time analysis and password generation.</div></noscript>
+        <div class="criteria-header"><h3>Password checklist</h3><span id="criteria-count">0 of 8 met</span></div>
+        <ul class="criteria-grid">
+          {% for key, label in [('minimum_length', 'At least 8 characters'), ('recommended_length', '12+ characters recommended'), ('uppercase', 'An uppercase letter'), ('lowercase', 'A lowercase letter'), ('number', 'A number'), ('symbol', 'A special character'), ('no_patterns', 'No obvious repeated patterns'), ('not_common', 'No common passwords')] %}
+          <li data-criterion="{{ key }}"><i class="bi bi-circle" aria-hidden="true"></i><span>{{ label }}</span><span class="visually-hidden criterion-status">Not met</span></li>
+          {% endfor %}
+        </ul>
+        <div class="checker-bottom"><span><i class="bi bi-rulers" aria-hidden="true"></i> <strong id="password-length">0</strong> characters</span><button class="plain-button" id="clear-password">Clear input <i class="bi bi-x" aria-hidden="true"></i></button></div>
+      </div>
+      <aside class="result-panel" aria-labelledby="result-title">
+        <span class="small-label" id="result-title">YOUR PASSWORD STRENGTH</span>
+        <div class="score-ring" id="score-ring"><div class="score-center"><strong id="score-value">—</strong><span>OUT OF 100</span></div></div>
+        <div class="strength-badge" id="strength-label" role="status" aria-live="polite">Ready when you are</div>
+        <div class="strength-meter" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="strength-progress"></div></div>
+        <div class="meter-scale"><span>Very weak</span><span>Very strong</span></div>
+        <p id="strength-description">Type a password to discover its strength.</p>
+        <div class="estimate-note"><i class="bi bi-info-circle" aria-hidden="true"></i> A helpful estimate, not a security guarantee.</div>
+      </aside>
+    </div>
+    <div class="recommendation-card"><span class="recommendation-icon"><i class="bi bi-lightbulb" aria-hidden="true"></i></span><div><h3>A little stronger, a lot safer.</h3><ul id="recommendations"><li>Your personalized recommendations will appear as you type.</li></ul></div><button class="btn-outline-custom save-button" id="save-analysis" disabled><i class="bi bi-bar-chart" aria-hidden="true"></i> Save anonymous result</button><p class="save-status" id="save-status" role="status"></p></div>
+    <p class="analytics-note">Optional: save only your score, length, and character-type flags to the demo analytics dashboard.</p>
+  </section>
+  <section class="generator-section" id="generator" aria-labelledby="generator-title">
+    <div class="section-heading"><div><span class="eyebrow">02 / A FRESH START</span><h2 id="generator-title">Let randomness do the work.</h2><p>Create a strong, unique password in a click.</p></div><span class="section-tag"><i class="bi bi-shuffle" aria-hidden="true"></i> Cryptographically random</span></div>
+    <div class="generator-card">
+      <div class="generator-settings"><h3>Make it yours</h3><div class="length-label"><label for="generator-length">Password length</label><output id="length-value" for="generator-length">16</output></div><input class="form-range" id="generator-length" type="range" min="8" max="64" value="16"><div class="range-labels"><span>8 characters</span><span>64 characters</span></div><div class="generator-options">{% for key, label, sample in [('uppercase', 'Uppercase', 'A–Z'), ('lowercase', 'Lowercase', 'a–z'), ('numbers', 'Numbers', '0–9'), ('symbols', 'Symbols', '!@#')] %}<label class="generator-option"><input type="checkbox" id="gen-{{ key }}" checked><span>{{ label }}</span><small>{{ sample }}</small></label>{% endfor %}</div><label class="exclude-option"><input type="checkbox" id="exclude-similar" checked> Exclude look-alike characters <span>Il1O0</span></label></div>
+      <div class="generator-output"><span class="small-label">YOUR NEW PASSWORD</span><div class="generated-field"><input id="generated-password" type="password" readonly placeholder="Your next strong password" aria-label="Generated password" autocomplete="off" spellcheck="false"><button class="visibility-button" id="generator-toggle" aria-label="Show generated password" aria-pressed="false"><i class="bi bi-eye" aria-hidden="true"></i></button></div><p class="generator-helper"><i class="bi bi-lock" aria-hidden="true"></i> Generated securely on your device. Never stored.</p><div class="generator-actions"><button class="btn-primary-custom" id="generate-button"><i class="bi bi-arrow-repeat" aria-hidden="true"></i> Generate password</button><button class="btn-outline-custom" id="copy-password" disabled><i class="bi bi-copy" aria-hidden="true"></i> Copy</button></div><button class="text-link use-password" id="use-generated" disabled>Check this password <i class="bi bi-arrow-up-right" aria-hidden="true"></i></button><p id="generator-status" class="generator-status" role="status">Choose your options, then let us handle the rest.</p></div>
+    </div>
+  </section>
+  <section class="habits-section" aria-labelledby="habits-title"><div class="section-heading"><div><span class="eyebrow">03 / BETTER EVERYDAY HABITS</span><h2 id="habits-title">Strong passwords are just the start.</h2></div><a class="text-link" href="{{ url_for('main.security_tips') }}">All security tips <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div><div class="feature-grid"><article class="feature-card"><span class="feature-icon teal"><i class="bi bi-key" aria-hidden="true"></i></span><h3>One account. One password.</h3><p>Give every account a unique password. One breach shouldn't open every door.</p><span class="feature-kicker">KEEP IT UNIQUE</span></article><article class="feature-card"><span class="feature-icon blue"><i class="bi bi-safe2" aria-hidden="true"></i></span><h3>Let a manager remember.</h3><p>A password manager creates and stores strong passwords, so you don't have to.</p><span class="feature-kicker">LESS TO REMEMBER</span></article><article class="feature-card"><span class="feature-icon purple"><i class="bi bi-phone" aria-hidden="true"></i></span><h3>Add another layer.</h3><p>Enable multifactor authentication to protect your accounts beyond a password.</p><span class="feature-kicker">DOUBLE DOWN ON SECURITY</span></article></div></section>
+  <section class="open-source-banner"><div><i class="bi bi-code-slash" aria-hidden="true"></i><div><h3>Built to be open. Designed to be private.</h3><p>A small, open-source project for a more secure web.</p></div></div><a href="https://github.com/AliAdilQ/password_strength_checker" class="btn-outline-custom" target="_blank" rel="noopener noreferrer"><i class="bi bi-github" aria-hidden="true"></i> Explore on GitHub <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/password-checker.js') }}" defer></script><script src="{{ url_for('static', filename='js/password-generator.js') }}" defer></script>{% endblock %}

@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}{{ code }}{% endblock %}
+{% block content %}<section class="page-width error-page"><span class="feature-icon teal"><i aria-hidden="true" class="bi bi-shield-exclamation"></i></span><span class="error-code">{{ code }}</span><h1>{{ title }}</h1><p>{{ message }}</p><a class="btn-primary-custom" href="{{ url_for('main.home') }}"><i aria-hidden="true" class="bi bi-arrow-left"></i> Back to the checker</a></section>{% endblock %}

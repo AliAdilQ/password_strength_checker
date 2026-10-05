@@ -1,0 +1,6 @@
+{
+  "length_points": [[20, 45], [16, 40], [12, 30], [8, 18], [5, 8]],
+  "common_passwords": ["password", "password123", "123456", "12345678", "123456789", "qwerty", "admin", "letmein", "welcome", "abc123", "iloveyou", "111111", "000000", "password1", "qwerty123"],
+  "dictionary_words": ["password", "qwerty", "admin", "letmein", "welcome", "iloveyou", "monkey", "dragon", "football", "baseball", "sunshine", "princess", "secret", "login"],
+  "sequences": ["0123456789", "abcdefghijklmnopqrstuvwxyz", "qwertyuiop", "asdfghjkl", "zxcvbnm"]
+}

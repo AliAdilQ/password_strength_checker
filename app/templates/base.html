@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Check password strength instantly, create secure passwords, and build better security habits. Your passwords are never stored.">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="color-scheme" content="light dark">
+  <title>{% block title %}Password Strength Checker{% endblock %} · Password Strength Checker</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block head %}{% endblock %}
+</head>
+<body data-page="{% block page %}public{% endblock %}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <nav class="page-width navbar" aria-label="Main navigation">
+      <a class="brand" href="{{ url_for('main.home') }}"><span class="brand-mark"><i class="bi bi-shield-lock-fill" aria-hidden="true"></i></span><span>Password<span class="brand-second">Strength Checker</span></span></a>
+      <button class="mobile-menu icon-button" id="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><i aria-hidden="true" class="bi bi-list"></i></button>
+      <div class="nav-links" id="nav-links">
+        <a class="{{ 'active' if request.endpoint == 'main.home' }}" href="{{ url_for('main.home') }}" {{ 'aria-current=page' if request.endpoint == 'main.home' }}>Home</a>
+        <a class="{{ 'active' if request.endpoint == 'main.security_tips' }}" href="{{ url_for('main.security_tips') }}">Security Tips</a>
+        <a class="{{ 'active' if request.endpoint == 'main.about' }}" href="{{ url_for('main.about') }}">About</a>
+        <span class="nav-divider"></span>
+        <a class="admin-link {{ 'active' if request.blueprint == 'admin' }}" href="{{ url_for('admin.dashboard') if current_user.is_authenticated else url_for('admin.login') }}"><i class="bi bi-grid-1x2" aria-hidden="true"></i> Admin</a>
+        <button class="icon-button theme-toggle" id="theme-toggle" aria-label="Switch to dark mode" title="Change color theme"><i class="bi bi-moon" aria-hidden="true"></i></button>
+      </div>
+    </nav>
+  </header>
+  {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}
+  <div class="page-width flash-stack" role="status">{% for category, message in messages %}<div class="flash flash-{{ category }}"><i class="bi bi-info-circle" aria-hidden="true"></i> {{ message }}</div>{% endfor %}</div>
+  {% endif %}{% endwith %}
+  <main id="main-content">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="page-width footer-top"><a class="brand footer-brand" href="{{ url_for('main.home') }}"><span class="brand-mark"><i class="bi bi-shield-lock-fill" aria-hidden="true"></i></span><span>Password Strength Checker</span></a><span class="footer-note"><i class="bi bi-lock" aria-hidden="true"></i> A small step toward a safer digital life.</span></div>
+    <div class="page-width footer-bottom"><span>© 2026 Password Strength Checker. Built with Python &amp; Flask.</span><a href="https://github.com/AliAdilQ" target="_blank" rel="noopener noreferrer"><i class="bi bi-github" aria-hidden="true"></i> AliAdilQ <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
